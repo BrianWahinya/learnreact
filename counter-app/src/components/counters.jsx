@@ -8,14 +8,17 @@ class Counters extends React.Component{
       {id:'Torch', name:'Torch', value: 0},
       {id:'Laptop', name:'Laptop', value: 0},
       {id:'Mouse', name:'Mouse', value: 0},
-      {id:'Screen', name:'Screen', value: 0}
+      {id:'Screen', name:'Screen', value: 0},
+      {id:'Charger', name:'Charger', value: 0},
+      {id:'Keyboard', name:'Keyboard', value: 0},
     ]
   }
 
   render(){
     return (
       <>
-        {this.state.products.map(prod => <Counter key={prod.id} counterId={prod.id} counterName={prod.name} />)}
+        {this.state.products.map(prod => 
+          <Counter key={prod.id} counterId={prod.id} counterName={prod.name} value={prod.value} />)}
       </>
     )
   }

@@ -10,7 +10,7 @@ class Counter extends React.Component {
     */
 
     state = {
-        count: 0,
+        value: this.props.value,
         productStyle: {
             width: 'fit-content'
         }
@@ -27,26 +27,27 @@ class Counter extends React.Component {
     }
 
     renderTags() {
-        const {key, counterId, counterName} = this.props;        
+        console.log('props', this.props)
+        const {counterId, counterName} = this.props;        
         return <>
             {<span className="position-relative m-3" style={this.state.productStyle}>
-                <span style={{'padding-right':8}}>{counterName}</span>
-                <span className={this.getBadgeClasses()}>{this.state.countName}</span>
+                <span style={{'paddingRight':8}}>{counterName}</span>
+                <span className={this.getBadgeClasses()}>{this.state.valueName}</span>
             </span>}
-            {<button id={key} onClick={() => this.countProductAmount('add', key)} className='badge m-2 btnAdd bg-primary'>+</button> /*Add button*/}
-            {<button id={key} onClick={() => this.countProductAmount('minus', key)} className='badge m-2 btnSubtract bg-danger'>-</button> /*Subtract button*/}
+            {<button id={counterId} onClick={() => this.countProductAmount('add', counterId)} className='badge m-2 btnAdd bg-primary'>+</button> /*Add button*/}
+            {<button id={counterId} onClick={() => this.countProductAmount('minus', counterId)} className='badge m-2 btnSubtract bg-danger'>-</button> /*Subtract button*/}
         </>;
     }
 
     getBadgeClasses() {
         let classes = "position-absolute top-0 start-100 translate-middle badge rounded-pill bg-";
         // classes += (this.state.count === 0) ? 'warning' : 'primary';
-        if(this.state.count === 0){
+        if(this.state.value === 0){
             classes += 'warning';
-            this.state.countName = 'Zero';
+            this.state.valueName = 'Zero';
         }else{
             classes += 'success';
-            this.state.countName = this.state.count;
+            this.state.valueName = this.state.value;
         }
         // console.log(this.state);
         return classes;
@@ -59,20 +60,18 @@ class Counter extends React.Component {
 
     // use fat-arrow function instead of using constructor
     countProductAmount = (instruction) => {
-        let {count} = this.state;
+        let {value} = this.state;
         switch(instruction){
             case 'add':
-                count++;       
+                value++;       
                 break;
             case 'minus':
-                if(count !== 0){
-                    count--;
+                if(value !== 0){
+                    value--;
                 }                
                 break;                
         }
-        this.setState({
-            count: count
-        })
+        this.setState({ value: value })
         // console.log('current state', this.state)       
     }
 }
