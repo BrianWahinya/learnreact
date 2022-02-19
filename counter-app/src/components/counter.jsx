@@ -9,13 +9,13 @@ class Counter extends React.Component {
     }
     */
 
-    state = {
-        value: this.props.value,
-        productStyle: {
-            width: 'fit-content'
-        }
-        // countName: method - getBadgeClasses
-    }
+    // state = {
+    //     value: this.props.value,
+    //     productStyle: {
+    //         width: 'fit-content'
+    //     }
+    //     // countName: method - getBadgeClasses
+    // }
 
     render() {
         return (
@@ -28,52 +28,28 @@ class Counter extends React.Component {
 
     renderTags() {
         console.log('props', this.props)
-        const {counterId, counterName} = this.props;        
+        const {product, countProductAmount, deleteProduct} = this.props;
+        const {id, name, value} = product;        
         return <>
-            {<span className="position-relative m-3" style={this.state.productStyle}>
-                <span style={{'paddingRight':8}}>{counterName}</span>
-                <span className={this.getBadgeClasses()}>{this.state.valueName}</span>
+            {<span className="position-relative m-3" style={{width:'fit-content'}}>
+                <span style={{'paddingRight':8}}>{name}</span>
+                <span className={this.getBadgeClasses(value)}>{this.formatValueName(value)}</span>
             </span>}
-            {<button id={counterId} onClick={() => this.countProductAmount('add', counterId)} className='badge m-2 btnAdd bg-primary'>+</button> /*Add button*/}
-            {<button id={counterId} onClick={() => this.countProductAmount('minus', counterId)} className='badge m-2 btnSubtract bg-danger'>-</button> /*Subtract button*/}
+            {<button id={id} onClick={() => countProductAmount('add', product)} className='badge m-2 btnAdd bg-primary'>+</button> /*Add button*/}
+            {<button id={id} onClick={() => countProductAmount('minus', product)} className='badge m-2 btnSubtract bg-secondary'>-</button> /*Subtract button*/}
+            {<button id={id} onClick={() => deleteProduct(product)} className='badge m-2 btnDelProd bg-danger'>Del</button> /*Delete button*/}
         </>;
     }
 
-    getBadgeClasses() {
+    getBadgeClasses(value) {
         let classes = "position-absolute top-0 start-100 translate-middle badge rounded-pill bg-";
-        // classes += (this.state.count === 0) ? 'warning' : 'primary';
-        if(this.state.value === 0){
-            classes += 'warning';
-            this.state.valueName = 'Zero';
-        }else{
-            classes += 'success';
-            this.state.valueName = this.state.value;
-        }
-        // console.log(this.state);
+        classes += (value === 0) ? 'warning' : 'primary';
         return classes;
     }
 
-    // formatCount() {
-    //     const { count } = this.state;
-    //     return (count === 0) ? 'Zero' : count;
-    // }
-
-    // use fat-arrow function instead of using constructor
-    countProductAmount = (instruction) => {
-        let {value} = this.state;
-        switch(instruction){
-            case 'add':
-                value++;       
-                break;
-            case 'minus':
-                if(value !== 0){
-                    value--;
-                }                
-                break;                
-        }
-        this.setState({ value: value })
-        // console.log('current state', this.state)       
-    }
+    formatValueName(value) {
+        return (value === 0) ? 'Zero' : value;
+    }    
 }
 
 export default Counter;
