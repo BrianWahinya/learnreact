@@ -27,7 +27,7 @@ class Counter extends React.Component {
     }
 
     renderTags() {
-        console.log('props', this.props)
+        // console.log('props', this.props)
         const {product, countProductAmount, deleteProduct} = this.props;
         const {id, name, value} = product;        
         return <>
