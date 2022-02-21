@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 import NavBar from './components/navbar';
 import Counters from './components/counters';
 import './App.css';
@@ -43,7 +43,9 @@ class App extends React.Component {
           if(products[index].value !== 0){
             products[index].value--;
           }                
-          break;                
+          break;
+        default:
+          products[index].value = 0;          
     }
     this.setState({products})
     // console.log('current state', this.state)       

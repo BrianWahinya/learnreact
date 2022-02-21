@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 
 // Method 1
 // Class
@@ -7,7 +7,7 @@ class NavBar extends React.Component {
     return (
       <nav className="navbar navbar-light bg-light">
         <div className="container-fluid">
-          <a className="navbar-brand" href="#">Total: {this.props.totalProducts()}</a>
+          <a className="navbar-brand" href="brianwahinya.com">Total: {this.props.totalProducts()}</a>
         </div>
       </nav>
     )
