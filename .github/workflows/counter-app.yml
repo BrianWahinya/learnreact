@@ -37,5 +37,5 @@ jobs:
         uses: BrianWahinya/learnreact@main
         with:
           type: now
-          from_branch: main
           target_branch: production
+          API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
