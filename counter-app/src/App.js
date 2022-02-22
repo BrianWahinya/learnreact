@@ -14,7 +14,8 @@ class App extends React.Component {
       {id:'Screen', name:'Screen', value: 0},
       {id:'Charger', name:'Charger', value: 0},
       {id:'Keyboard', name:'Keyboard', value: 0},
-      {id:'Usb', name:'Usb', value: 0}
+      {id:'Usb', name:'Usb', value: 0},
+      {id:'Charger', name:'Charger', value: 0}
     ]
   }
   

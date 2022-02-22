@@ -3,6 +3,6 @@ import App from './App';
 
 test('renders learn react link', () => {
   render(<App />);
-  const navbarTitle = screen.getByText(/Total/i);
+  const navbarTitle = screen.getByText(/wekaweka/i);
   expect(navbarTitle).toBeInTheDocument();
 });
