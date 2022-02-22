@@ -34,8 +34,8 @@ jobs:
       - run: npm test
       
       - name: Merge development -> staging
+        uses: BrianWahinya/learnreact@main
         with:
           type: now
           from_branch: main
           target_branch: production
-          github_token: ${{ github.token }}
