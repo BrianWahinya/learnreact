@@ -33,24 +33,21 @@ jobs:
       - run: npm run build --if-present
       - run: npm test
   Production:
+    if: github.event.pull_request.merged == true
+    timeout-minutes: 2
     runs-on: self-hosted
     environment: Production
-    defaults:
-        run:
-          working-directory: counter-app/
-    strategy:
-      matrix:
-        node-version: [12.x]
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
-
+    needs: Testing
     steps:
-      - uses: actions/checkout@v2
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v2
-        with:
-          node-version: ${{ matrix.node-version }}
-          cache: "npm"
-          cache-dependency-path: "./counter-app/package-lock.json"
-      - run: npm ci
-      - run: npm run build --if-present
-      - run: npm test
+    - uses: actions/checkout@v2
+    - name: Set Git config
+      run: |
+          git config --local user.email "brianwahinyangure@gmail.com"
+          git config --local user.name "BrianWahinya"
+    - name: Merge main back to production
+      run: |
+          git fetch --unshallow
+          git checkout production
+          git pull
+          git merge --no-ff main -m "Auto-merge main back to production"
+          git push
