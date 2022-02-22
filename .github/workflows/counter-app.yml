@@ -38,7 +38,7 @@ jobs:
         env:
           API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
         with:
-          source-directory: output/
+          source-directory: counter-app/
           destination-github-username: "BrianWahinya"
           destination-repository-name: "learnreact"
           user-email: brianwahinyangure@gmail.com
