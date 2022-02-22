@@ -10,12 +10,12 @@ on:
     branches: [main, production]
 
 jobs:
-  build:
+  Testing:
     runs-on: self-hosted
+    environment: Testing
     defaults:
-      run:
-        working-directory: counter-app/
-
+        run:
+          working-directory: counter-app/
     strategy:
       matrix:
         node-version: [12.x]
@@ -32,10 +32,25 @@ jobs:
       - run: npm ci
       - run: npm run build --if-present
       - run: npm test
-      
-      - name: Merge development -> staging
-        uses: BrianWahinya/learnreact@main
+  Production:
+    runs-on: self-hosted
+    environment: Production
+    defaults:
+        run:
+          working-directory: counter-app/
+    strategy:
+      matrix:
+        node-version: [12.x]
+        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
         with:
-          type: now
-          target_branch: production
-          API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
+          node-version: ${{ matrix.node-version }}
+          cache: "npm"
+          cache-dependency-path: "./counter-app/package-lock.json"
+      - run: npm ci
+      - run: npm run build --if-present
+      - run: npm test
