@@ -32,8 +32,8 @@ jobs:
       - run: npm ci
       - run: npm run build --if-present
       - run: npm test
+      
       - name: Merge development -> staging
-        uses: BrianWahinya/learnreact@main
         with:
           type: now
           from_branch: main
