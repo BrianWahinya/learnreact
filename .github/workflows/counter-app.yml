@@ -32,15 +32,15 @@ jobs:
       - run: npm ci
       - run: npm run build --if-present
       - run: npm test
-#       - name: Pushes to another repository
-#         id: push_directory
-#         uses: BrianWahinya/learnreact@main
-#         env:
-#           API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
-#         with:
-#           source-directory: counter-app/
-#           destination-github-username: "BrianWahinya"
-#           destination-repository-name: "learnreact"
-#           user-email: brianwahinyangure@gmail.com
-#           commit-message: See ORIGIN_COMMIT from $GITHUB_REF
-#           target-branch: production
+      - name: Pushes to another repository
+        id: push_directory
+        uses: BrianWahinya/learnreact@main
+        env:
+          API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
+        with:
+          source-directory: ./
+          destination-github-username: "BrianWahinya"
+          destination-repository-name: "reacttest"
+          user-email: brianwahinyangure@gmail.com
+          commit-message: See ORIGIN_COMMIT from $GITHUB_REF
+          target-branch: main
