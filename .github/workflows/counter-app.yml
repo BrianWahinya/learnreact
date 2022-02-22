@@ -34,7 +34,7 @@ jobs:
       - run: npm test
   Production:
     needs: Testing
-    if: github.ref == 'refs/heads/production' && needs.Testing.result == 'success' #only run if it's a commit to main AND previous success
+    if: github.ref == 'refs/heads/main' && needs.Testing.result == 'success' #only run if it's a commit to main AND previous success
 #     if: github.event.pull_request.merged == true
     timeout-minutes: 2
     runs-on: self-hosted
